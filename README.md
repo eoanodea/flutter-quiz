@@ -2,11 +2,14 @@
 
 ## Description
 
+A simple quiz app that ask's you questions and
+shows you your score at the end.
+
 Based on a tutorial by [London App Brewery on Linkedin Learning](https://www.linkedin.com/learning-login/share?forceAccount=false&redirect=https%3A%2F%2Fwww.linkedin.com%2Flearning%2Fflutter-part-05-flutter-and-dart-packages%3Ftrk%3Dshare_ent_url&account=56744273)
 
 ## Demo
 
-Coming soon
+<img src="https://github.com/eoanodea/flutter-quiz/blob/master/demo.gif" alt="Finished App" width="300">
 
 ## What you need to run this code
 
