@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quiz/question.dart';
+import 'package:flutter_quiz/quiz_controller.dart';
+
+QuizController quizController = new QuizController();
 
 void main() => runApp(Quizzler());
 
@@ -27,20 +29,14 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<bool> scoreKeeper = [];
-  List<Question> questions = [
-    Question(q: 'You can lead a cow down stairs but not up stairs.', a: false),
-    Question(
-        q: 'Approximately one quarter of human bones are in the feet.',
-        a: true),
-    Question(q: 'A slug\'s blood is green.', a: true),
-  ];
 
   /// Adds an icon as either a check or a close icon
   /// to the [scoreKeeper] list
   /// depending on what the user provides
   void addScore(bool isCheck) {
     bool result = false;
-    if (isCheck == questions[scoreKeeper.length].questionAnswer) result = true;
+    if (isCheck == quizController.getCorrectAnswer(scoreKeeper.length))
+      result = true;
 
     setState(() => scoreKeeper.add(result));
   }
@@ -53,7 +49,7 @@ class _QuizPageState extends State<QuizPage> {
   /// Renders the result page
   Widget renderAnswerPage() {
     int result = 0;
-    int numOfQuestions = questions.length;
+    int numOfQuestions = quizController.getNumQuestions();
     scoreKeeper.forEach((el) => {if (el) result++});
 
     return Column(
@@ -113,7 +109,8 @@ class _QuizPageState extends State<QuizPage> {
 
   @override
   Widget build(BuildContext context) {
-    if (scoreKeeper.length == questions.length) return renderAnswerPage();
+    if (scoreKeeper.length == quizController.getNumQuestions())
+      return renderAnswerPage();
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -124,7 +121,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questions[scoreKeeper.length].questionText,
+                quizController.getQuestionText(scoreKeeper.length),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
